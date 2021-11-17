@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="flexible" content="initial-dpr=2" />
+	<title>建议与反馈</title>
+</head>
+<body>
+
+	<label for="feedback" class="hide">请留言告诉我们您的看法。如您希望收到我们的回复，请在此留下联系方式。</label>
+	<br><textarea id="feedback" name="feedback" cols="70" rows="10" placeholder="请留言告诉我们您的看法。如您希望收到我们的回复，请在此留下联系方式。"></textarea>
+	<br>
+</div><br>
+<label style="text-align: center;color:blue" id="feedbackmsg"> </label>
+<br>
+<button class="button black-button" type="button" id="submit" onclick="javascript:feedback()">提交</button>
+</div>
+
+<script type="text/javascript" src="js/rem.js" ></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js" ></script>
+<script>
+	$(function(){
+			//文字隐藏
+			$(".content").each(function() {
+				if($(this).text().length>44){
+					var str=$(this).text();
+					str=str.substring(0,44)
+					$(this).text(str+"...");
+				}
+			});
+		})
+	function feedback(){
+		var feedmsg=$("#feedback").val();
+		$("#feedbackmsg").html('感谢您的支持,反馈成功.');
+		$.ajax({
+			        url:  "http://www.rocktckj.com/user/feedback?msg="+feedmsg,
+			        cache: false,
+			        contentType: false,
+			        processData: false,
+			        type: 'GET',
+			        success: function (result) {
+			        	alert(result)
+			        }
+			    });
+	}
+</script>
+</body>
+</html>
